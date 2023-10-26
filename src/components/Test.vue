@@ -2,67 +2,34 @@
 export default {
   data() {
     return {
-      message: "",
-      date: true,
-      name: "Manu",
-      isRed: false,
+      name: "Manu Abhishek",
+      color_value: "red",
+      colorsArr: ["red", "yellow", "black", "orange", "pink"],
     };
   },
-  created() {
-    console.log("created");
-    this.date = new Date();
-  },
-
-  mounted() {
-    console.log("mounted");
-    this.date = new Date();
-  },
-
-  updated() {
-    console.log("updated");
-    // this.date = new Date();
-  },
-
-  destroyed() {
-    console.log("destroyed");
-    this.date = new Date();
-  },
-  methods: {
-    clear() {
-      this.message = " ";
-    },
-    capitalLetter() {
-      this.message = this.message.toUpperCase();
-    },
-    red() {
-      console.log(this.isRed, "redwala");
-      // this.isRed = this.redbox === "yes"
-    },
-  },
+  methods: {},
 };
 </script>
 
 <template>
   <div>
-    <h3>Type here Dude</h3>
-    <span>
-      <input v-model="message" placeholder="type here" />
-      -- <span><button @click="clear">Clear</button></span> --<span>
-        <button @click="capitalLetter()">Make in capital</button></span
-      >
-    </span>
-    <p>{{ message }}</p>
+    <h2 :style="{ color: color_value }">{{ name }} - {{ color_value }}</h2>
 
-    <p>{{ date }}</p>
+    <!-- THERE ARE TWO WAYS TO BIND ONE BY SIMPLE OPTION AND OTHER BY LOOPING WITH v-for -->
+    <!-- Here i simply used the string value instead of binding for binding write
+          :value instead of value
+ -->
 
-    <div :class="{ red: isRed }">{{ name }} Class Test</div>
-    <input :checked="isRed" v-model="isRed" type="checkbox" @click="red" /> Red
-    <!-- Vue Checkbox Checked: The “checked” attribute is used to determine whether a checkbox is selected or not. -->
+    <select v-model="color_value">
+      <!-- <option disabled value="">Please select one</option>
+      <option value="red">Red</option>
+      <option value="blue">Blue</option>
+      <option value="green">Green</option>
+      <option value="yellow">yellow</option> -->
+
+      <option v-for="(item, index) in colorsArr" :key="index" :value="item">
+        {{ item }}
+      </option>
+    </select>
   </div>
 </template>
-
-<style>
-.red {
-  color: red;
-}
-</style>
