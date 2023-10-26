@@ -4,6 +4,8 @@ export default {
     return {
       message: "",
       date: true,
+      name: "Manu",
+      isRed: false,
     };
   },
   created() {
@@ -32,6 +34,10 @@ export default {
     capitalLetter() {
       this.message = this.message.toUpperCase();
     },
+    red() {
+      console.log(this.isRed, "redwala");
+      // this.isRed = this.redbox === "yes"
+    },
   },
 };
 </script>
@@ -48,5 +54,15 @@ export default {
     <p>{{ message }}</p>
 
     <p>{{ date }}</p>
+
+    <div :class="{ red: isRed }">{{ name }} Class Test</div>
+    <input :checked="isRed" v-model="isRed" type="checkbox" @click="red" /> Red
+    <!-- Vue Checkbox Checked: The “checked” attribute is used to determine whether a checkbox is selected or not. -->
   </div>
 </template>
+
+<style>
+.red {
+  color: red;
+}
+</style>
