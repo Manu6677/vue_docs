@@ -2,12 +2,16 @@
 export default {
   data() {
     return {
-      name: "manu abhishek",
+      message: "",
     };
   },
 };
 </script>
 
 <template>
-  <h2>{{ name }} Testing</h2>
+  <div>
+    <h3>Type here Dude</h3>
+    <input v-model="message" placeholder="type here" />
+    <p>{{ message }}</p>
+  </div>
 </template>
