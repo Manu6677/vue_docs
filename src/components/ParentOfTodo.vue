@@ -16,14 +16,16 @@ export default {
           title: "Burning Kingdom",
         },
       ],
+      nextTodoId: 3,
     };
   },
   methods: {
     addTaskInTodo() {
       this.todos.push({
+        id: this.nextTodoId++,
         title: this.newTodoText,
       });
-
+      console.log(this.todos.id);
       this.newTodoText = "";
     },
   },
@@ -41,9 +43,10 @@ export default {
 
     <ul>
       <TodoList
-        v-for="value in todos"
+        v-for="(value, index) in todos"
         v-bind:key="value.id"
         :title="value.title"
+        @remove="todos.splice(index, 1)"
       >
       </TodoList>
     </ul>
