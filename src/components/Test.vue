@@ -3,7 +3,7 @@ export default {
   data() {
     return {
       message: "",
-      date: true,
+      date: "",
       name: "Manu",
       isRed: false,
     };
@@ -48,7 +48,7 @@ export default {
     <span>
       <input v-model="message" placeholder="type here" />
       -- <span><button @click="clear">Clear</button></span> --<span>
-        <button @click="capitalLetter()">Make in capital</button></span
+        <button @click="capitalLetter">Make in capital</button></span
       >
     </span>
     <p>{{ message }}</p>
