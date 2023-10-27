@@ -21,6 +21,10 @@ export default {
   },
   methods: {
     addTaskInTodo() {
+      if (!this.nextTodotext) {
+        return alert("Please fill field first");
+      }
+
       this.todos.push({
         id: this.nextTodoId++,
         title: this.newTodoText,
