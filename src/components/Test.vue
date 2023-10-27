@@ -9,22 +9,22 @@ export default {
     };
   },
   created() {
-    console.log("created");
+    // console.log("created");
     this.date = new Date();
   },
 
   mounted() {
-    console.log("mounted");
+    // console.log("mounted");
     this.date = new Date();
   },
 
   updated() {
-    console.log("updated");
+    // console.log("updated");
     // this.date = new Date();
   },
 
   destroyed() {
-    console.log("destroyed");
+    // console.log("destroyed");
     this.date = new Date();
   },
   methods: {
