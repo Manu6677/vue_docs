@@ -6,6 +6,7 @@ export default {
   data() {
     return {
       editedTask: null,
+      isEditBtnClicked: true,
       newTodoText: "",
       todos: [
         {
@@ -46,6 +47,20 @@ export default {
       this.newTodoText = this.todos[data].title;
       this.editedTask = data;
     },
+
+    addChangesInTodoFn(data) {
+      console.log(data);
+      console.log(data[0]);
+      console.log(data[1]);
+      // this.todos = data[1];
+      // console.log(this.todos[data[0]].title);
+      this.todos[data[0]].title = data[1];
+      this.isEditBtnClicked = true;
+    },
+    isEditBtnClickedChangedFn(data) {
+      console.log(data);
+      this.isEditBtnClicked = false;
+    },
   },
 };
 </script>
@@ -65,8 +80,11 @@ export default {
         v-bind:key="value.id"
         :title="value.title"
         :indexNumber="index"
+        :isEditBtnClicked="isEditBtnClicked"
         @remove="todos.splice(index, 1)"
         @editTodo="editTaskInTodo($event)"
+        @addChangesInTodo="addChangesInTodoFn($event)"
+        @isEditBtnClickedChanged="isEditBtnClickedChangedFn($event)"
       >
       </TodoList>
     </ul>
