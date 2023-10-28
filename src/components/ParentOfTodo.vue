@@ -67,9 +67,9 @@ export default {
 
 <template>
   <div>
-    <h2>Make you Todo list</h2>
+    <h2>Make Your Todolist</h2>
     <form v-on:submit.prevent="addTaskInTodo">
-      <label for="newTodo">Put Tasks : </label>
+      <label for="newTodo">Put Task : </label>
       <input v-model="newTodoText" placeholder="type here" id="newTodo" />
       <button>Add</button>
     </form>

@@ -7,6 +7,7 @@ export default {
     return {
       changeText: "",
       checkEditClicked: false,
+      isTitlePropVisible: true,
     };
   },
 
@@ -18,10 +19,12 @@ export default {
       this.changeText = this.title;
       this.checkEditClicked = true;
       this.$emit("isEditBtnClickedChanged", this.isEditBtnClicked);
+      this.isTitlePropVisible = false;
     },
     addChanges() {
       this.$emit("addChangesInTodo", [this.indexNumber, this.changeText]);
       this.checkEditClicked = false;
+      this.isTitlePropVisible = true;
     },
   },
 };
@@ -30,12 +33,14 @@ export default {
 <template>
   <div>
     <div class="item">
-      <span
-        >{{ title }}
+      <span>
+        <p v-if="isTitlePropVisible">{{ title }}</p>
         <div v-if="checkEditClicked">
-          <input v-model="changeText" placeholder="edit here" />
-
-          <button @click="addChanges">Add changes</button>
+          <input
+            v-model="changeText"
+            placeholder="edit here"
+            @keyup.enter="addChanges"
+          />
         </div>
       </span>
     </div>
