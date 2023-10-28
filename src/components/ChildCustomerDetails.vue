@@ -8,6 +8,7 @@ export default {
       editLName: "",
       editAdd: "",
       isInputFieldVisible: false,
+      isRed: false,
     };
   },
   methods: {
@@ -36,7 +37,7 @@ export default {
 </script>
 
 <template>
-  <div class="customerDetailsBox">
+  <div class="customerDetailsBox" :class="{ red: isRed }">
     <!-- {{ isEditBtnClicked }} -->
     <table class="tableborder">
       <tr class="tablerow">
@@ -90,7 +91,7 @@ export default {
 
         <!-- <td class="tableDataCheckbox"><input type="checkbox" /></td> -->
         <td class="tableDataCheckbox">
-          <input type="checkbox" />
+          <input type="checkbox" v-model="isRed" />
         </td>
       </tr>
     </table>
@@ -126,5 +127,9 @@ export default {
   border: 1px solid white;
   width: 50px;
   text-align: center;
+}
+
+.red {
+  color: red;
 }
 </style>
