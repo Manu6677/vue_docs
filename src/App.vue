@@ -1,6 +1,6 @@
 <script>
 import BaseButton from "./components/BaseButton.vue";
-
+import { store } from "./components/store.js";
 export default {
   components: { BaseButton },
   data() {
@@ -35,7 +35,7 @@ export default {
       //   this.trackClickTimes = this.trackClickTimes + 1;
 
       //   console.log(this.trackClickTimes);
-      console.log(this.allText);
+      //   console.log(this.allText);
 
       if (this.trackClickTimes == true) {
         alert("Btn Clicked time");
@@ -53,6 +53,11 @@ export default {
 
       console.log(this.trackClickTimes);
     },
+    addChangesToText(data) {
+      //   console.log(data);
+      //   console.log(this.allText[data[2]].title);
+      this.allText[data[2]].title = data[1];
+    },
   },
 };
 </script>
@@ -69,6 +74,8 @@ export default {
       :key="index"
       :title="item.title"
       class="click-btn"
+      :indexNum="index"
+      @addChanges="addChangesToText($event)"
     />
     <button @click="firstClick" class="first-btn">Enter</button>
   </div>
