@@ -1,16 +1,34 @@
 <script>
 export default {
-  props: ["startTimerInApp", "isTimerStoped"],
+  props: ["indexNumber"],
   data() {
-    return {};
+    return {
+      isStartClicked: false,
+      startTimer: 0,
+      isTimerStoped: false,
+      myInterval: null,
+    };
   },
   methods: {
     start() {
-      this.$emit("countDownStart", this.startTimerInApp);
-      console.log(this.startTimerInApp);
+      this.isTimerStoped = false;
+      this.isStartClicked = true;
+      this.myInterval = setInterval(() => {
+        if (this.isTimerStoped == false) {
+          this.startTimer = this.startTimer + 1;
+          // console.log(this.startTimer);
+        }
+      }, 1000);
     },
-    end() {
-      this.$emit("countDownEnd", this.isTimerStoped);
+
+    pause() {
+      clearInterval(this.myInterval);
+      this.isTimerStoped = true;
+      this.isStartClicked = false;
+    },
+
+    Del() {
+      this.$emit("del", this.indexNumber);
     },
   },
 };
@@ -18,19 +36,17 @@ export default {
 
 <template>
   <div>
-    <h3>This is Timer App</h3>
-    <h3>Timer: {{ this.startTimerInApp }}</h3>
-
-    <span class="start-end-btn">
-      <button @click="start">Start</button>
-      <button @click="end">End</button>
-    </span>
+    <div class="timer">
+      <h3>Count: {{ this.startTimer }}</h3>
+      <button v-if="isStartClicked == false" @click="start">Start</button>
+      <button v-else @click="pause">Pause</button>
+    </div>
+    <button @click="Del">Del</button>
   </div>
 </template>
 
 <style scoped>
-.start-end-btn {
-  display: flex;
-  justify-content: space-between;
+.timer {
+  margin: 10px;
 }
 </style>
