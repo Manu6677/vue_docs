@@ -17,23 +17,25 @@ export default {
     },
     addedTimer() {
       this.isActive = true;
+      
+    },
+    enterTitle() { 
+      this.isActive = false;
+      // console.log(this.titleOfTimer);
       // const data = {
       //   title: this.titleOfTimer,
       //   id: Math.random().toString(),
       //   TimerCount: 0,
       // }
+
       // this.TimerList.push(JSON.parse(JSON.stringify(data)));
-      // this.titleOfTimer=""
-    },
-    enterTitle() { 
-      this.isActive = false;
-      console.log(this.titleOfTimer);
-      const data = {
+
+      this.TimerList.push({
         title: this.titleOfTimer,
         id: Math.random().toString(),
-        TimerCount: 0,
-      }
-      this.TimerList.push(JSON.parse(JSON.stringify(data)));
+        TimerCount: 0
+      })
+
       this.titleOfTimer=""
     },
   },
