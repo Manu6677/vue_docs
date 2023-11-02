@@ -1,5 +1,16 @@
-<script setup></script>
+<script>
+import Form from "./components/Form.vue"
 
-<template></template>
+export default{
+    components: {Form},
+    data(){
+        return{}
+    }
+}
+</script>
+
+<template>
+<Form />
+</template>
 
 <style scoped></style>
