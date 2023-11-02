@@ -3,6 +3,7 @@ export default {
   props: ["id", "email", "name", "dob", "password", "matchPassword", "index"],
   data() {
     return {
+      isEditBtnClicked: false,
         isInputFieldVisible: false,
         editEmail: "",
         editName: "",
@@ -17,11 +18,24 @@ export default {
     },
     edit(){
         this.isInputFieldVisible = true
+        this.editEmail = this.email
+        this.editName = this.name
+        this.editDob = this.dob
         this.$emit("editUser", this.id)
+        this.isEditBtnClicked = true
+
     },
     addEditedChanges(){
+      let mailValidation = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+
+      if(!this.editEmail.match(mailValidation)) {
+        console.log("email validate")
+        return alert("Please enter valid email")
+      }
+
         this.$emit("editInTable", [this.index, this.editEmail, this.editName, this.editDob])
         this.isInputFieldVisible = false
+        this.isEditBtnClicked = false
     }
   },
 };
@@ -37,7 +51,7 @@ export default {
             <td class="" v-if="!isInputFieldVisible">{{ email }}</td>
             <input
               v-if="isInputFieldVisible"
-              type="text"
+              type="email"
               v-model="editEmail"
               @keyup.enter="addEditedChanges"
             />
@@ -65,7 +79,7 @@ export default {
             <td class="" v-if="!isInputFieldVisible">{{ dob }}</td>
             <input
               v-if="isInputFieldVisible"
-              type="text"
+              type="date"
               v-model="editDob"
               @keyup.enter="addEditedChanges"
             />
@@ -75,7 +89,9 @@ export default {
 
 
       <td class="table-data"> 
-      <button class="btn-edit" @click="edit"> Edit </button>
+      <button class="btn-edit" @click="edit" v-if="!isEditBtnClicked"> Edit </button>
+      <button class="btn-edit" @click="addEditedChanges" v-else-if="isEditBtnClicked"> Save </button>
+      
       <button class="btn-del" @click="del"> Del </button>
       </td>
       </tr>      
