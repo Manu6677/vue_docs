@@ -1,5 +1,22 @@
-<script setup></script>
+<script>
+import Component1 from './components/Component1.vue'
 
-<template></template>
+export default{
+    name: 'app',
+   components: {Component1},
+    data(){
+        return{}
+    }
+}
+</script>
 
-<style scoped></style>
+<template>
+<div id="app"> 
+<Component1 />
+</div>
+</template>
+
+<style>
+
+
+</style>
