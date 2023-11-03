@@ -1,9 +1,9 @@
 <script>
-import Component1 from './components/Component1.vue'
+import AddTask from "./components/AddTask.vue"
 
 export default{
     name: 'app',
-   components: {Component1},
+   components: {AddTask},
     data(){
         return{}
     }
@@ -12,7 +12,7 @@ export default{
 
 <template>
 <div id="app"> 
-<Component1 />
+<AddTask />
 </div>
 </template>
 
