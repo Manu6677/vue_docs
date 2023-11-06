@@ -4,10 +4,8 @@ import { mapMutations, mapState } from "vuex";
 // import store from "vuex"
 export default {
   components: { History },
-  methods: {},
   data() {
     return {
-   
       isEditBtnClickParent: "",
       editedId: "",
       isEditedValue: false,
@@ -24,7 +22,7 @@ export default {
           this.value,
           true,
         ]);
-        this.isEditBtnClickParent = false
+        this.isEditBtnClickParent = false;
         this.isEditedValue = false;
         this.value = "";
 
@@ -34,11 +32,9 @@ export default {
         this.value = "";
       }
     },
-    editDataInInput({title, id, isEditBtnClicked}) {
-    //   console.log(title, id, isEditBtnClicked)
-    this.isEditBtnClickParent = isEditBtnClicked
-       this.editedId = id
-       this.value = title
+    editDataInInput({ title, id }) {
+      this.editedId = id;
+      this.value = title;
       this.isEditedValue = true;
     },
   },
@@ -66,7 +62,12 @@ export default {
 
     <!-- <History @idOfData="editDataInInput($event)" :isEditBtnClickParent="isEditBtnClickParent"/> -->
     <h3>History of task</h3>
-    <History v-for="item in allTask" :key="item.id" :id="item.id" :title="item.title" :isEditBtnClickParent="isEditBtnClickParent" @idOfData="editDataInInput" />
+    <History
+      v-for="item in allTask"
+      :key="item.id"
+      :item="item"
+      @idOfData="editDataInInput"
+    />
   </div>
 </template>
 

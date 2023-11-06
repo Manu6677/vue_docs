@@ -2,6 +2,7 @@ import { createApp } from "vue";
 import "./style.css";
 import { createStore } from "vuex";
 import App from "./App.vue";
+import VuexPersistence from "vuex-persist";
 
 // const store = createStore({
 //     state() {
@@ -45,6 +46,15 @@ import App from "./App.vue";
 //     }
 // })
 
+const vuexLocal = new VuexPersistence({
+  storage: window.localStorage,
+  key: 'userTask',
+  storage: window.localStorage,
+  reducer: (state) => ( {allTask: state.allTask} ),
+  // filter: (mutation) => mutation.type === "addTaskToList",
+});
+
+
 const store = createStore({
   state() {
     return {
@@ -52,20 +62,20 @@ const store = createStore({
         {
           id: 1,
           title: "Do Workout",
-         
+          isEdited: false,
         },
       ],
     };
   },
   mutations: {
     addTaskToList(state, payload) {
-      console.log(payload);
       if (!payload) {
         return alert("Invalid Value");
       } else if (payload[2] == true) {
         state.allTask.find((task) => {
           if (task.id === payload[0]) {
             task.title = payload[1];
+            task.isEdited = false;
           }
         });
       } else {
@@ -73,6 +83,7 @@ const store = createStore({
         state.allTask.push({
           id: nextId + 1,
           title: payload,
+          isEdited: false,
         });
       }
     },
@@ -82,10 +93,18 @@ const store = createStore({
       console.log(index);
       state.allTask.splice(index, 1);
     },
-    editTaskFromList(state, payload) {
-      console.log(payload);
+
+    editButton(state, id) {
+      console.log(id);
+      state.allTask.find((task) => {
+        if (task.id === id) {
+          task.isEdited = true;
+        }
+      });
     },
+    RESTORE_MUTATION: vuexLocal.RESTORE_MUTATION,
   },
+  plugins: [vuexLocal.plugin],
 });
 
 const app = createApp(App);

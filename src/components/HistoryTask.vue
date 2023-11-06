@@ -1,20 +1,19 @@
 <script>
-import {  mapMutations } from "vuex";
-import store from "vuex";
+import { mapMutations } from "vuex";
 export default {
-  props: ["id", "title", "isEditBtnClickParent"],
+  props: ["item"],
   methods: {},
   data() {
     return {
-      isEditBtnClicked: false,      
+      isEditBtnClicked: false,
     };
   },
-  watch: {
-    isEditBtnClickParent() {
-      this.isEditBtnClicked = this.isEditBtnClickParent;
-      console.log(this.isEditBtnClicked);
-    },
-  },
+    // watch: {
+    //   isEditBtnClickParent() {
+    //     this.isEditBtnClicked = this.isEditBtnClickParent;
+    //     console.log(this.isEditBtnClicked);
+    //   },
+    // },
 
   methods: {
     ...mapMutations(["editTaskFromList", "delTaskFromList"]),
@@ -24,10 +23,9 @@ export default {
     },
 
     editTaskFromListMiddleFn(title, id) {
-      console.log(title);
-      console.log(id);
-     this.isEditBtnClicked = true
-      this.$emit("idOfData", {title, id, isEditBtnClicked :  this.isEditBtnClicked});
+    //   this.isEditBtnClicked = true;
+      this.$emit("idOfData", { title, id });
+      this.$store.commit("editButton", id);
     },
   },
 };
@@ -39,17 +37,17 @@ export default {
         <ul>
           <span class="title-btn">
             <div class="title">
-              <h4 class="">{{ title }}</h4>
+              <h4 class="">{{ item.title }}</h4>
             </div>
             <div class="btn">
               <button
                 class="btnEdit"
-                @click="editTaskFromListMiddleFn(title, id)"
-                :disabled="isEditBtnClicked"
+                @click="editTaskFromListMiddleFn(item.title, item.id)"
+                :disabled="item.isEdited"
               >
                 Edit
               </button>
-              <button class="btnDel" @click="delTaskFromListMiddleFn(id)">
+              <button class="btnDel" @click="delTaskFromListMiddleFn(item.id)">
                 Del
               </button>
             </div>
