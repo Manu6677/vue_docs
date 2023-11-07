@@ -24,15 +24,16 @@ export default {
 <template>
   <div class="">
     <div class="card">
-      <div class="crossIcon">
+      <span class="crossIcon">
         <font-awesome-icon
           icon="fa-solid fa-xmark"
           class="closeBtn"
+         
           @click="delCardMiddleFn(animal.id)"
         />
-      </div>
+      </span>
       <div class="imgHere">
-        <img :src="imgUrL" alt="noImg" style="width: 190px; height: 160px; border-radius: 10px"/>
+        <img :src="imgUrL" alt="noImg" style="width: 190px; height: 160px; border-radius: 10px; z-index: -1"/>
       </div>
       <div class="title">{{ animal.title }}</div>
     </div>
@@ -63,9 +64,9 @@ export default {
   margin-top: -25px;
   height: 160px;
   display: flex;
-  background-color: #a9a9a9;
   border-radius: 10px;
   justify-content: center;
+  z-index: -1;
 }
 
 .title {
@@ -90,11 +91,13 @@ export default {
 
 .crossIcon {
   margin-top: -4px;
-  z-index: 50;
+  z-index: 100;
   cursor: pointer;
   margin-left: 150px;
 }
 .closeBtn {
+  z-index: 100;
   height: 20px;
+  cursor: pointer;
 }
 </style>
